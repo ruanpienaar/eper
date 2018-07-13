@@ -196,7 +196,7 @@ start(Trc,Props) when is_list(Props) ->
       try
         Cnf = assert_print_fun(make_cnf(Trc,[{shell_pid,self()}|Props])),
         assert_cookie(Cnf),
-        register(redbug, spawn(fun init/0)),
+        register(redbug, spawn_link(fun init/0)),
         redbug ! {start,Cnf},
         maybe_block(Cnf,block_a_little())
       catch
